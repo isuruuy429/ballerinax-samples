@@ -46,11 +46,11 @@ isolated function getPatient(string id) returns aubase410:AUBasePatient|r4:FHIRE
                 {
                     url: "http://hl7.org/fhir/StructureDefinition/patient-genderIdentity",
                     valueCodeableConcept: {
-                        coding :[
+                        coding: [
                             {
                                 "system": " https://healthterminologies.gov.au/fhir/ValueSet/gender-identity-response-1",
-				                "code": "446151000124109",
-				                "display": "male"
+                                "code": "446151000124109",
+                                "display": "male"
                             }
                         ]
                     }
@@ -85,7 +85,7 @@ isolated function getPatient(string id) returns aubase410:AUBasePatient|r4:FHIRE
                     }
                 }
             ]
-            
+
         };
         return auPatient;
 
@@ -97,10 +97,10 @@ isolated function getPatient(string id) returns aubase410:AUBasePatient|r4:FHIRE
 }
 
 isolated function getAllPatients() returns r4:Bundle|r4:FHIRError?|error {
-    do{
+    do {
         r4:BundleEntry[] entries = [];
 
-    aubase410:AUBasePatient auPatient1 = {
+        aubase410:AUBasePatient auPatient1 = {
             birthDate: "1989-04-29",
             extension: [
                 {
@@ -141,17 +141,17 @@ isolated function getAllPatients() returns r4:Bundle|r4:FHIRError?|error {
                 {
                     url: "http://hl7.org/fhir/StructureDefinition/patient-genderIdentity",
                     valueCodeableConcept: {
-                        coding :[
+                        coding: [
                             {
                                 "system": " https://healthterminologies.gov.au/fhir/ValueSet/gender-identity-response-1",
-				                "code": "446151000124109",
-				                "display": "male"
+                                "code": "446151000124109",
+                                "display": "male"
                             }
                         ]
                     }
                 }
             ]
-            
+
         };
 
         aubase410:AUBasePatient auPatient2 = {
@@ -178,17 +178,17 @@ isolated function getAllPatients() returns r4:Bundle|r4:FHIRError?|error {
                     valueBoolean: false
                 }
             ]
-            
+
         };
 
-       entries.push({
-                'resource: auPatient1
-            });
         entries.push({
-                'resource: auPatient2
-            });
+            'resource: auPatient1
+        });
+        entries.push({
+            'resource: auPatient2
+        });
 
-     r4:Bundle bundle = {
+        r4:Bundle bundle = {
             'type: r4:BUNDLE_TYPE_SEARCHSET,
             entry: entries
         };
@@ -196,7 +196,7 @@ isolated function getAllPatients() returns r4:Bundle|r4:FHIRError?|error {
         log:printInfo(bundle.toString());
         return bundle;
 
-    }on fail error parseError {
+    } on fail error parseError {
         log:printError(string `Error occurred while parsing : ${parseError.message()}`, parseError);
     }
 

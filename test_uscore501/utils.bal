@@ -2,6 +2,7 @@
 import ballerinax/health.fhir.r4;
 import ballerinax/health.fhir.r4.uscore501;
 
+//check gender and assign code
 isolated function checkGender(string gender) returns r4:PatientGender? {
     r4:PatientGender? patientGender = r4:CODE_GENDER_UNKNOWN;
     if gender == "female" {
@@ -16,6 +17,7 @@ isolated function checkGender(string gender) returns r4:PatientGender? {
     return patientGender;
 }
 
+//check address use and assign code
 isolated function checkAddressUse(string addressUse) returns r4:AddressUse? {
     r4:AddressUse? addressUseType = "home";
 

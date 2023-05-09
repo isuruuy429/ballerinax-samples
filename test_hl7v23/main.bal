@@ -4,13 +4,13 @@ import ballerina/log;
 
 public function main() returns error? {
     string ad1a01Msg_patient = "MSH|^~\\&|AccMgr|1|||20050110045504||ADT^A01|599102|P|2.3 \r"
-                        +"EVN|A01|20050110045502 \r"
-                        +"PID|||1^^^^BR||Doe^John^Leo^^Mr^PhD^M^P||1989-04-29|F|||1234 MAIN ST^APT 204^HOUSTON^TX^77001^USA^O~Abercrombie St^^Austin^Alaska^02199^ASM^H||^NET^X.400^johndoe@gmail.com \r"
-                        +"PV1|1|I \r";
-    
+                        + "EVN|A01|20050110045502 \r"
+                        + "PID|||1^^^^BR||Doe^John^Leo^^Mr^PhD^M^P||1989-04-29|F|||1234 MAIN ST^APT 204^HOUSTON^TX^77001^USA^O~Abercrombie St^^Austin^Alaska^02199^ASM^H||^NET^X.400^johndoe@gmail.com \r"
+                        + "PV1|1|I \r";
+
     string ORU_R01 = "MSH|^~\\&|SendingApp|SendingFac|ReceivingApp|ReceivingFac|20120920230252907||ORU^R01|2012092017490562|T|2.3 \r"
                     + "OBR||5234342^http://acme.com/lab/reports|R-GEN-378456-2-1|58410-2^Complete blood count (hemogram) panel - Blood by Automated count^http://loinc.org|||201209202036|||||||||||||||20120920230242||TX|X|||||||39023&Smith&Rovan&&&DR^2022-03-23^2024-03-23 ";
-    
+
     byte[] byteMessage_adta01 = hl7v2:createHL7WirePayload(ad1a01Msg_patient.toBytes());
     byte[] byteMessage_orur01 = hl7v2:createHL7WirePayload(ORU_R01.toBytes());
 
@@ -35,7 +35,7 @@ public function main() returns error? {
     hl7v23:CX[] patientId = adtMsg.pid.pid3;
     hl7v23:XAD[] patientAddress = adtMsg.pid.pid11;
     hl7v23:XTN[] patientPhone = adtMsg.pid.pid13;
-    
+
     log:printInfo("Patient Family Name: " + patientName[0].xpn1);
     log:printInfo("Patient Gender: " + patientGender);
     log:printInfo("Patient DOB: " + patientDOB.ts1);
