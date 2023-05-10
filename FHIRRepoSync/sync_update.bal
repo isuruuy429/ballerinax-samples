@@ -59,11 +59,11 @@ function fetchRecentlyUpdatedResources(time:Utc lastInvocation, time:Utc now) re
                 family: "Chalmers",
                 given: [
                     "Peter",
-                    "James"
+                    "James P"
                 ]
             }
         ],
-        gender: "male",
+        gender: "female",
         birthDate: "1974-12-25"
     };
 

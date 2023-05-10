@@ -395,6 +395,33 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "test_fhirreposync",
+			"item": [
+				{
+					"name": "lastUpdated",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://hapi.fhir.org/baseR4/Patient/783035c",
+							"protocol": "http",
+							"host": [
+								"hapi",
+								"fhir",
+								"org"
+							],
+							"path": [
+								"baseR4",
+								"Patient",
+								"783035c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -22,6 +22,12 @@
 import ballerina/time;
 
 import ballerinax/health.fhir.r4;
+import ballerina/http;
+
+configurable string timeDemoUrl = "https://c32618cf-389d-44f1-93ee-b67a3468aae3-dev.e1-us-east-azure.choreoapis.dev/vqxm/timedemo/endpoint-9090-803/1.0.0";
+configurable string tokenUrl = "https://api.asgardeo.io/t/wso2healthcare/oauth2/token";
+configurable string clientId = "DDEUZ7IdFPjrEp2knbyWOebMf1Ia";
+configurable string clientSecret = "qVUQamlyfBXc1_sORfhRtF2BhOQa";
 
 # Fetch the last invocation time of the scheduler
 #
@@ -29,7 +35,17 @@ import ballerinax/health.fhir.r4;
 function fetchLastInvocationTime() returns time:Utc|error {
     // Integration developer logic to access scheduler last invocation time from the client persistence layer.
     // Remove the default error return with your implementation.
-    return error("Unimplemented method fetchLastInvocationTime() in client_util.bal");
+     http:Client httpClient = check new (url = timeDemoUrl, config = {
+        auth: {
+            tokenUrl: tokenUrl,
+            clientId: clientId,
+            clientSecret: clientSecret
+        }
+    });
+    json result = check httpClient->get(path = "/lastInvocation", targetType = json);
+    string lastInvocationString = check result.time;
+    time:Utc lastInvocationUtc = check time:utcFromString(lastInvocationString);
+    return lastInvocationUtc;
 }
 
 # Push the current invocation time of the scheduler
@@ -39,7 +55,14 @@ function fetchLastInvocationTime() returns time:Utc|error {
 function pushCurrentInvocationTime(time:Utc now) returns error? {
     // Integration developer logic to save scheduler current invocation time to the client persistence layer.
     // Remove the default error return with your implementation.
-    return error("Unimplemented method pushCurrentInvocationTime(time:Utc now) in client_util.bal");
+        http:Client httpClient = check new (url = timeDemoUrl, config = {
+        auth: {
+            tokenUrl: tokenUrl,
+            clientId: clientId,
+            clientSecret: clientSecret
+        }
+    });
+    _ = check httpClient->put(path = string `/lastInvocation?time=${time:utcToString(now)}`, message = {}, targetType = json);
 }
 
 # Process r4:BundleEntry[] into multiple r4:BundleEntry[]s
