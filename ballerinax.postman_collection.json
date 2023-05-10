@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "82dc6e3f-453c-4125-a5c6-293b25491af3",
+		"name": "ballerinax",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2350060"
+	},
+	"item": [
+		{
+			"name": "test_epicconnect",
+			"item": [
+				{
+					"name": "patient search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient?_id=eHdsSXrXB1AfpHB6MboZQSw3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient"
+							],
+							"query": [
+								{
+									"key": "_id",
+									"value": "eHdsSXrXB1AfpHB6MboZQSw3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patient/getbyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient/eHdsSXrXB1AfpHB6MboZQSw3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient",
+								"eHdsSXrXB1AfpHB6MboZQSw3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"resourceType\": \"Patient\",\n    \"identifier\": [\n        {\n            \"use\": \"usual\",\n            \"system\": \"urn:oid:2.16.840.1.113883.4.1\",\n            \"value\": \"111-11-8888\"\n        }\n        ],\n    \"active\": \"true\",\n    \"name\": [\n        {\n            \"use\": \"official\",\n            \"family\": \"Singh\",\n            \"given\": [\n                \"Deepika\"\n            ]\n        }\n    ],\n    \"telecom\": [\n        {\n            \"system\": \"phone\",\n            \"value\": \"0542-3355669\",\n            \"use\": \"home\"\n        },\n        {\n            \"system\": \"email\",\n            \"value\": \"deepika,nai.a@gmail.com\"\n        }\n    ],\n    \"gender\": \"female\",\n    \"birthDate\": \"1987-03-02\",\n    \"address\": [\n        {\n            \"use\": \"home\",\n            \"line\": [\n                \"Emma\"\n            ],\n            \"city\": \"Eindhoven\",\n            \"state\": \"NB\",\n            \"postalCode\": \"5611AZ\",\n            \"country\": \"NL\"\n        }\n    ],\n    \"maritalStatus\": {\n        \"text\": \"Married\"\n    },\n    \"generalPractitioner\": [\n        {\n            \"display\": \"Physician Family Medicine, MD\",\n            \"reference\": \"eM5CWtq15N0WJeuCet5bJlQ3\"\n        }\n    ],\n    \"extension\": [\n        {\n            \"url\": \"http://open.epic.com/FHIR/STU3/StructureDefinition/patient-preferred-provider-language\",\n            \"valueCodeableConcept\": {\n                \"coding\": [\n                    {\n                        \"system\": \"urn:oid:2.16.840.1.113883.6.99\",\n                        \"code\": \"ja\"\n                    }\n                ],\n                \"text\": \"Hindi\"\n            }\n        },\n        {\n            \"url\": \"http://open.epic.com/FHIR/STU3/StructureDefinition/patient-preferred-provider-sex\",\n            \"valueCode\": \"female\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "metadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/metadata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"metadata"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_metadata_template",
+			"item": [
+				{
+					"name": "metadata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/metadata",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"metadata"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_PatientAPI_international_template",
+			"item": [
+				{
+					"name": "getbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient/example",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient",
+								"example"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_uscorepatient_template",
+			"item": [
+				{
+					"name": "getbyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient/abc12s3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient",
+								"abc12s3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read-patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_aubase410",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/au/fhir/r4/Patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"au",
+								"fhir",
+								"r4",
+								"Patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/au/fhir/r4/Patient/123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"au",
+								"fhir",
+								"r4",
+								"Patient",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_fhirr4",
+			"item": [
+				{
+					"name": "getbyId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/fhir/r4/Patient/123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"r4",
+								"Patient",
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_uscore501_pkg",
+			"item": [
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\" : \"Patient\",\n  \"id\" : \"9\",\n    \"identifier\" : [\n    {\n      \"use\" : \"usual\",\n      \"system\" : \"http://hospital.smarthealthit.org\",\n      \"value\" : \"1\"\n    }\n  ],\n  \"active\" : true,\n  \"name\" : [\n    {\n      \"family\" : \"Dicaprio\",\n      \"given\" : [\n        \"Leonardo\"\n      ],\n      \"use\":\"official\"\n    }\n  ],\n  \"gender\" : \"male\",\n  \"telecom\" : [\n    {\n      \"system\" : \"phone\",\n      \"value\" : \"444-555-5555\",\n      \"use\" : \"home\"\n    }\n  ],\n  \"birthDate\" : \"2016-01-15\",\n   \"address\" : [\n    {\n        \"use\":\"home\",\n      \"line\" : [\n        \"49 Meadow St\"\n      ],\n      \"city\" : \"Mounds\",\n      \"state\" : \"OK\",\n      \"postalCode\" : \"74047\",\n      \"country\" : \"US\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetbyId - Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/patients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllPatients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/patients/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"patients",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_r4utils",
+			"item": [
+				{
+					"name": "fhirpath",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fhirResource\" : {\n        \"resourceType\" : \"Patient\",\n        \"id\": \"1\",\n        \"meta\": {\n            \"profile\": [\n                \"http://hl7.org/fhir/StructureDefinition/Patient\"\n            ]\n        },\n        \"active\":true,\n        \"name\":[\n            {\n                \"use\":\"official\",\n                \"family\":\"Chalmers\",\n                \"given\":[\n                    \"Peter\",\n                    \"James\"\n                ]\n            },\n            {\n                \"use\":\"usual\",\n                \"given\":[\n                    \"Jim\"\n                ]\n            }\n        ],\n        \"gender\":\"male\",\n        \"birthDate\":\"1974-12-25\",\n        \"managingOrganization\":{\n            \"reference\":\"Organization/1\",\n            \"display\":\"Burgers University Medical Center\"\n        },\n        \"address\":[\n            {\n                \"use\":\"home\",\n                \"line\":[\n                    \"534 Erewhon St\",\n                    \"sqw\"\n                ],\n                \"city\":\"PleasantVille\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3999\",\n                \"country\":\"Australia\"\n            },\n            {\n                \"use\":\"work\",\n                \"line\":[\n                    \"33[0] 6th St\"\n                ],\n                \"city\":\"Melbourne\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3000\",\n                \"country\":\"Australia\"\n            }\n        ]\n    },\n    \"fhirPath\" : [\"Patient.address[1].line[0]\",\"Patient.activje\",\"Patient.address[0].line[0]\",\"Patient.address.use\", \"Patient.name.given[0]\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/fhir/fhirpath",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"fhir",
+								"fhirpath"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
