@@ -99,6 +99,9 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
 ]
+modules = [
+	{org = "ballerina", packageName = "io", moduleName = "io"}
+]
 
 [[package]]
 org = "ballerina"
@@ -202,6 +205,9 @@ dependencies = [
 	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "observe"}
 ]
+modules = [
+	{org = "ballerina", packageName = "log", moduleName = "log"}
+]
 
 [[package]]
 org = "ballerina"
@@ -268,6 +274,9 @@ version = "2.2.4"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
 ]
+modules = [
+	{org = "ballerina", packageName = "time", moduleName = "time"}
+]
 
 [[package]]
 org = "ballerina"
@@ -275,18 +284,6 @@ name = "url"
 version = "2.2.3"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
-]
-
-[[package]]
-org = "ballerina"
-name = "uuid"
-version = "1.4.0"
-dependencies = [
-	{org = "ballerina", name = "crypto"},
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "lang.int"},
-	{org = "ballerina", name = "regex"},
-	{org = "ballerina", name = "time"}
 ]
 
 [[package]]
@@ -303,45 +300,42 @@ modules = [
 
 [[package]]
 org = "ballerinax"
-name = "health.base"
-version = "1.0.1"
-dependencies = [
-	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jwt"},
-	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "mime"},
-	{org = "ballerina", name = "time"},
-	{org = "ballerina", name = "uuid"}
-]
-
-[[package]]
-org = "ballerinax"
-name = "health.clients.fhir"
-version = "1.0.1"
-dependencies = [
-	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "regex"},
-	{org = "ballerina", name = "url"},
-	{org = "ballerinai", name = "observe"},
-	{org = "ballerinax", name = "health.base"}
-]
-modules = [
-	{org = "ballerinax", packageName = "health.clients.fhir", moduleName = "health.clients.fhir"}
-]
-
-[[package]]
-org = "ballerinax"
-name = "test_epicconnect"
+name = "health.fhir.templates.r4.metadata"
 version = "1.0.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
-	{org = "ballerinai", name = "observe"},
-	{org = "ballerinax", name = "health.clients.fhir"}
+	{org = "ballerina", name = "io"},
+	{org = "ballerina", name = "log"},
+	{org = "ballerina", name = "time"},
+	{org = "ballerinai", name = "observe"}
 ]
 modules = [
-	{org = "ballerinax", packageName = "test_epicconnect", moduleName = "test_epicconnect"}
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata"},
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata.config"},
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata.constants"},
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata.handlers"},
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata.models"},
+	{org = "ballerinax", packageName = "health.fhir.templates.r4.metadata", moduleName = "health.fhir.templates.r4.metadata.samples"}
+]
+
+[[package]]
+org = "ballerinax"
+name = "test_metadata2"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "io"},
+	{org = "ballerina", name = "log"},
+	{org = "ballerina", name = "time"},
+	{org = "ballerinai", name = "observe"},
+	{org = "ballerinax", name = "health.fhir.templates.r4.metadata"}
+]
+modules = [
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2"},
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2.config"},
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2.constants"},
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2.handlers"},
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2.models"},
+	{org = "ballerinax", packageName = "test_metadata2", moduleName = "test_metadata2.samples"}
 ]
 

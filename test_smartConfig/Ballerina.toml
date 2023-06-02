@@ -1,0 +1,12 @@
+[package]
+org = "ballerinax"
+name = "test_smartConfig"
+version = "1.0.1"
+export = ["test_smartConfig.config","test_smartConfig.constants","test_smartConfig.handlers","test_smartConfig.models"]
+distribution = "2201.5.0"
+authors = ["Ballerina"]
+keywords = ["Healthcare","FHIR","SMART"]
+repository = "https://github.com/ballerina-platform/module-ballerinax-health.fhir.templates"
+
+[build-options]
+observabilityIncluded = true
