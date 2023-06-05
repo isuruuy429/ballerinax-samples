@@ -11,16 +11,34 @@
 			"item": [
 				{
 					"name": "patient search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test_ifTheIdExists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.entry[0].resource.id).to.eql(\"eHdsSXrXB1AfpHB6MboZQSw3\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient?_id=eHdsSXrXB1AfpHB6MboZQSw3",
+							"raw": "http://localhost:9091/fhir/r4/Patient?_id=eHdsSXrXB1AfpHB6MboZQSw3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9091",
 							"path": [
 								"fhir",
 								"r4",
@@ -38,16 +56,34 @@
 				},
 				{
 					"name": "Patient/getbyId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test_ifTheIdExists\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(\"eHdsSXrXB1AfpHB6MboZQSw3\");",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient/eHdsSXrXB1AfpHB6MboZQSw3",
+							"raw": "http://localhost:9091/fhir/r4/Patient/eHdsSXrXB1AfpHB6MboZQSw3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9091",
 							"path": [
 								"fhir",
 								"r4",
@@ -60,6 +96,25 @@
 				},
 				{
 					"name": "Create Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -73,12 +128,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient",
+							"raw": "http://localhost:9091/fhir/r4/Patient",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9091",
 							"path": [
 								"fhir",
 								"r4",
@@ -90,16 +145,53 @@
 				},
 				{
 					"name": "metadata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is application/fhir+json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/fhir+json');",
+									"});",
+									"",
+									"pm.test(\"metadata response contains status\", function () {",
+									"   pm.expect(pm.response.json().status).to.eql(\"active\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains kind\", function () {",
+									"    pm.expect(pm.response.json().kind).to.eql(\"instance\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains fhirVersion\", function () {",
+									"   pm.expect(pm.response.json().fhirVersion).to.eql(\"4.0.1\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains format\", function () {",
+									"   pm.expect(pm.response.json().format).to.include(\"xml\", \"json\", \"ttl\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/metadata",
+							"raw": "http://localhost:9091/fhir/r4/metadata",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9091",
 							"path": [
 								"fhir",
 								"r4",
@@ -109,6 +201,28 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var shell = WScript.CreateObject(\"WScript.Shell\");",
+							"shell.Run(\"cd /Users/isuruuy/Desktop/RND/OH/testing/feature-testing/choreo/ballerinax-samples/test_epicconnect\");",
+							"shell.Run(\"bal run\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -116,16 +230,53 @@
 			"item": [
 				{
 					"name": "metadata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is application/fhir+json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/fhir+json');",
+									"});",
+									"",
+									"pm.test(\"metadata response contains status\", function () {",
+									"   pm.expect(pm.response.json().status).to.eql(\"active\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains date\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains kind\", function () {",
+									"    pm.expect(pm.response.json().kind).to.eql(\"instance\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains fhirVersion\", function () {",
+									"   pm.expect(pm.response.json().fhirVersion).to.eql(\"4.0.1\");",
+									"});",
+									"",
+									"pm.test(\"metadata response contains format\", function () {",
+									"   pm.expect(pm.response.json().format).to.include(\"xml\", \"json\", \"ttl\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/metadata",
+							"raw": "http://localhost:9093/fhir/r4/metadata",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9093",
 							"path": [
 								"fhir",
 								"r4",
@@ -146,12 +297,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient/example",
+							"raw": "http://localhost:9094/fhir/r4/Patient/example",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9094",
 							"path": [
 								"fhir",
 								"r4",
@@ -173,12 +324,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient/abc12s3",
+							"raw": "http://localhost:9098/fhir/r4/Patient/abc12s3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9098",
 							"path": [
 								"fhir",
 								"r4",
@@ -195,12 +346,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient",
+							"raw": "http://localhost:9098/fhir/r4/Patient",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9098",
 							"path": [
 								"fhir",
 								"r4",
@@ -217,6 +368,22 @@
 			"item": [
 				{
 					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(responseJson.resourceType).to.eql(\"Bundle\");",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -239,6 +406,74 @@
 				},
 				{
 					"name": "getbyid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(responseJson.resourceType).to.eql(\"Patient\");",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test Address data type properties\", () => {",
+									"  let addressData = responseJson.address[0];",
+									"  pm.expect(addressData.type).to.eql(\"both\");",
+									"  pm.expect(addressData.text).to.eql(\"123 Fake Street, Melbourne, VIC 3000\");",
+									"  pm.expect(addressData.line[0]).to.eql(\"123 Fake Street\");",
+									"  pm.expect(addressData.city).to.eql(\"Melbourne\");",
+									"  pm.expect(addressData.district).to.eql(\"Melbourne\");",
+									"  pm.expect(addressData.state).to.eql(\"VIC\");",
+									"  pm.expect(addressData.postalCode).to.eql(\"3000\");",
+									"  pm.expect(addressData.country).to.eql(\"Australia\");",
+									"});",
+									"",
+									"pm.test(\"Test Birthdate\", ()=>{",
+									"    pm.expect(responseJson.birthDate).to.eql(\"1989-04-29\");",
+									"});",
+									"",
+									"pm.test(\"Test Patient.identifier\", ()=>{",
+									"    let identifierData = responseJson.identifier[0];",
+									"    pm.expect(identifierData.type.coding[0].system).to.eql(\"http://terminology.hl7.org/CodeSystem/v2-0203\");",
+									"    pm.expect(identifierData.type.coding[0].code).to.eql(\"MC\");",
+									"    pm.expect(identifierData.type.coding[0].display).to.eql(\"Patient's Medicare Number\");",
+									"    pm.expect(identifierData.system).to.eql(\"http://ns.electronichealth.net.au/id/medicare-number\");",
+									"    pm.expect(identifierData.value).to.eql(\"32788511952\");",
+									"});",
+									"",
+									"pm.test(\"Test mothersMaidenName\", ()=>{",
+									"    let extensionMothersMaidenName = responseJson.extension[2];",
+									"    pm.expect(extensionMothersMaidenName.url).to.eql(\"http://hl7.org/fhir/StructureDefinition/patient-mothersMaidenName\");",
+									"    pm.expect(extensionMothersMaidenName.valueString).to.eql(\"Jane\");",
+									"})",
+									"",
+									"pm.test(\"Test closingTheGapRegistration\", ()=>{",
+									"    let closingTheGapRegistration = responseJson.extension[1];",
+									"    pm.expect(closingTheGapRegistration.url).to.eql(\"http://hl7.org.au/fhir/StructureDefinition/closing-the-gap-registration\");",
+									"    pm.expect(closingTheGapRegistration.valueBoolean).to.eql(true);",
+									"})",
+									"",
+									"pm.test(\"Test indigenousStatus\", ()=>{",
+									"    let indigenousStatus = responseJson.extension[0];",
+									"    pm.expect(indigenousStatus.url).to.eql(\"http://hl7.org.au/fhir/StructureDefinition/indigenous-status\");",
+									"    pm.expect(indigenousStatus.valueCoding.system).to.eql(\"https://healthterminologies.gov.au/fhir/CodeSystem/australian-indigenous-status-1\");",
+									"})",
+									"",
+									"pm.test(\"Test genderIdentity\", ()=>{",
+									"    let genderIdentity = responseJson.extension[5];",
+									"    pm.expect(genderIdentity.url).to.eql(\"http://hl7.org/fhir/StructureDefinition/patient-genderIdentity\");",
+									"pm.expect(genderIdentity.valueCodeableConcept.coding[0].system).to.eql(\"https://healthterminologies.gov.au/fhir/ValueSet/gender-identity-response-1\");",
+									"    pm.expect(genderIdentity.valueCodeableConcept.coding[0].code).to.eql(\"446151000124109\");",
+									"    pm.expect(genderIdentity.valueCodeableConcept.coding[0].display).to.eql(\"male\");",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -267,16 +502,40 @@
 			"item": [
 				{
 					"name": "getbyId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(responseJson.resourceType).to.eql(\"Patient\");",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test Gender\", ()=>{",
+									"    pm.expect(responseJson.gender).to.eql(\"male\");",
+									"});",
+									"",
+									"pm.test(\"Test id\", ()=>{",
+									"    pm.expect(responseJson.id).to.eql(\"321444\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/fhir/r4/Patient/123",
+							"raw": "http://localhost:9092/fhir/r4/Patient/123",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9092",
 							"path": [
 								"fhir",
 								"r4",
@@ -294,12 +553,25 @@
 			"item": [
 				{
 					"name": "Create Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"resourceType\" : \"Patient\",\n  \"id\" : \"9\",\n    \"identifier\" : [\n    {\n      \"use\" : \"usual\",\n      \"system\" : \"http://hospital.smarthealthit.org\",\n      \"value\" : \"1\"\n    }\n  ],\n  \"active\" : true,\n  \"name\" : [\n    {\n      \"family\" : \"Dicaprio\",\n      \"given\" : [\n        \"Leonardo\"\n      ],\n      \"use\":\"official\"\n    }\n  ],\n  \"gender\" : \"male\",\n  \"telecom\" : [\n    {\n      \"system\" : \"phone\",\n      \"value\" : \"444-555-5555\",\n      \"use\" : \"home\"\n    }\n  ],\n  \"birthDate\" : \"2016-01-15\",\n   \"address\" : [\n    {\n        \"use\":\"home\",\n      \"line\" : [\n        \"49 Meadow St\"\n      ],\n      \"city\" : \"Mounds\",\n      \"state\" : \"OK\",\n      \"postalCode\" : \"74047\",\n      \"country\" : \"US\"\n    }\n  ]\n}",
+							"raw": "{\n  \"resourceType\" : \"Patient\",\n  \"id\" : \"{{$guid}}\",\n    \"identifier\" : [\n    {\n      \"use\" : \"usual\",\n      \"system\" : \"http://hospital.smarthealthit.org\",\n      \"value\" : \"1\"\n    }\n  ],\n  \"active\" : true,\n  \"name\" : [\n    {\n      \"family\" : \"Dicaprio\",\n      \"given\" : [\n        \"Leonardo\"\n      ],\n      \"use\":\"official\"\n    }\n  ],\n  \"gender\" : \"male\",\n  \"telecom\" : [\n    {\n      \"system\" : \"phone\",\n      \"value\" : \"444-555-5555\",\n      \"use\" : \"home\"\n    }\n  ],\n  \"birthDate\" : \"2016-01-15\",\n   \"address\" : [\n    {\n        \"use\":\"home\",\n      \"line\" : [\n        \"49 Meadow St\"\n      ],\n      \"city\" : \"Mounds\",\n      \"state\" : \"OK\",\n      \"postalCode\" : \"74047\",\n      \"country\" : \"US\"\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,12 +579,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/patients",
+							"raw": "http://localhost:9097/patients",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9097",
 							"path": [
 								"patients"
 							]
@@ -322,19 +594,43 @@
 				},
 				{
 					"name": "GetbyId - Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(responseJson.resourceType).to.eql(\"Patient\");",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test id\", ()=>{",
+									"    pm.expect(responseJson.id).to.eql(\"9\");",
+									"});",
+									"",
+									"pm.test(\"Test meta\", ()=>{",
+									"    pm.expect(responseJson.meta.profile[0]).to.eql(\"http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/patients/1",
+							"raw": "http://localhost:9097/patients/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9097",
 							"path": [
 								"patients",
-								"1"
+								"9"
 							]
 						}
 					},
@@ -342,16 +638,37 @@
 				},
 				{
 					"name": "GetAllPatients",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(responseJson.resourceType).to.eql(\"Bundle\");",
+									"});",
+									"",
+									"pm.test(\"Test all patients are available\", ()=>{",
+									"    pm.expect(responseJson.entry[0].resource.id).to.eql(\"1\");",
+									"    pm.expect(responseJson.entry[1].resource.id).to.eql(\"10\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9090/patients/getAll",
+							"raw": "http://localhost:9097/patients/getAll",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9097",
 							"path": [
 								"patients",
 								"getAll"
@@ -367,12 +684,44 @@
 			"item": [
 				{
 					"name": "fhirpath",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Test Patient.active\", ()=>{",
+									"    pm.expect(responseJson[\"Patient.active\"].result).to.eql(true);",
+									"});",
+									"",
+									"pm.test(\"Test Patient.givenName\", ()=>{",
+									"    pm.expect(responseJson[\"Patient.name.given[0]\"].result).to.have.members([\"Peter\", \"Jim\"]);",
+									"});",
+									"",
+									"pm.test(\"Test Patient.address-use\", ()=>{",
+									"    pm.expect(responseJson[\"Patient.address.use\"].result).to.have.members([\"home\", \"work\"]);",
+									"});",
+									"",
+									"pm.test(\"Test incorrect FHIR path\", ()=>{",
+									"    pm.expect(responseJson[\"Patient.actived\"].resultenError).to.eql(\"The given FhirPath expression is incorrect for the given FHIR resource\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fhirResource\" : {\n        \"resourceType\" : \"Patient\",\n        \"id\": \"1\",\n        \"meta\": {\n            \"profile\": [\n                \"http://hl7.org/fhir/StructureDefinition/Patient\"\n            ]\n        },\n        \"active\":true,\n        \"name\":[\n            {\n                \"use\":\"official\",\n                \"family\":\"Chalmers\",\n                \"given\":[\n                    \"Peter\",\n                    \"James\"\n                ]\n            },\n            {\n                \"use\":\"usual\",\n                \"given\":[\n                    \"Jim\"\n                ]\n            }\n        ],\n        \"gender\":\"male\",\n        \"birthDate\":\"1974-12-25\",\n        \"managingOrganization\":{\n            \"reference\":\"Organization/1\",\n            \"display\":\"Burgers University Medical Center\"\n        },\n        \"address\":[\n            {\n                \"use\":\"home\",\n                \"line\":[\n                    \"534 Erewhon St\",\n                    \"sqw\"\n                ],\n                \"city\":\"PleasantVille\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3999\",\n                \"country\":\"Australia\"\n            },\n            {\n                \"use\":\"work\",\n                \"line\":[\n                    \"33[0] 6th St\"\n                ],\n                \"city\":\"Melbourne\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3000\",\n                \"country\":\"Australia\"\n            }\n        ]\n    },\n    \"fhirPath\" : [\"Patient.address[1].line[0]\",\"Patient.activje\",\"Patient.address[0].line[0]\",\"Patient.address.use\", \"Patient.name.given[0]\"]\n}",
+							"raw": "{\n    \"fhirResource\" : {\n        \"resourceType\" : \"Patient\",\n        \"id\": \"1\",\n        \"meta\": {\n            \"profile\": [\n                \"http://hl7.org/fhir/StructureDefinition/Patient\"\n            ]\n        },\n        \"active\":true,\n        \"name\":[\n            {\n                \"use\":\"official\",\n                \"family\":\"Chalmers\",\n                \"given\":[\n                    \"Peter\",\n                    \"James\"\n                ]\n            },\n            {\n                \"use\":\"usual\",\n                \"given\":[\n                    \"Jim\"\n                ]\n            }\n        ],\n        \"gender\":\"male\",\n        \"birthDate\":\"1974-12-25\",\n        \"managingOrganization\":{\n            \"reference\":\"Organization/1\",\n            \"display\":\"Burgers University Medical Center\"\n        },\n        \"address\":[\n            {\n                \"use\":\"home\",\n                \"line\":[\n                    \"534 Erewhon St\",\n                    \"sqw\"\n                ],\n                \"city\":\"PleasantVille\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3999\",\n                \"country\":\"Australia\"\n            },\n            {\n                \"use\":\"work\",\n                \"line\":[\n                    \"33[0] 6th St\"\n                ],\n                \"city\":\"Melbourne\",\n                \"district\":\"Rainbow\",\n                \"state\":\"Vic\",\n                \"postalCode\":\"3000\",\n                \"country\":\"Australia\"\n            }\n        ]\n    },\n    \"fhirPath\" : [\"Patient.address[1].line[0]\",\"Patient.active\",\"Patient.address[0].line[0]\",\"Patient.address.use\", \"Patient.name.given[0]\", \"Patient.actived\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,12 +729,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9090/fhir/fhirpath",
+							"raw": "http://localhost:9095/fhir/fhirpath",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9090",
+							"port": "9095",
 							"path": [
 								"fhir",
 								"fhirpath"
@@ -416,6 +765,72 @@
 								"baseR4",
 								"Patient",
 								"783035c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test_smartconfig",
+			"item": [
+				{
+					"name": "smart-configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"smart-configuration response status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response contains authorization_endpoint\", function () {",
+									"   pm.expect(pm.response.text()).to.include(\"authorization_endpoint\");",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response contains grant_types_supported\", function () {",
+									"   pm.expect(pm.response.text()).to.include(\"grant_types_supported\");",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response contains token_endpoint\", function () {",
+									"   pm.expect(pm.response.text()).to.include(\"token_endpoint\");",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response contains capabilities\", function () {",
+									"   pm.expect(pm.response.text()).to.include(\"capabilities\");",
+									"});",
+									"",
+									"pm.test(\"smart-configuration response contains code_challenge_methods_supported\", function () {",
+									"   pm.expect(pm.response.text()).to.include(\"code_challenge_methods_supported\");",
+									"   pm.expect(pm.response.json().code_challenge_methods_supported).to.include(\"S256\");",
+									"   pm.expect(pm.response.json().code_challenge_methods_supported).not.to.include(\"plain\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9096/fhir/r4/.well-known/smart-configuration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9096",
+							"path": [
+								"fhir",
+								"r4",
+								".well-known",
+								"smart-configuration"
 							]
 						}
 					},

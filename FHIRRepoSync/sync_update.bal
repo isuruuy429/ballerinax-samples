@@ -58,7 +58,7 @@ function fetchRecentlyUpdatedResources(time:Utc lastInvocation, time:Utc now) re
             {
                 family: "Chalmers",
                 given: [
-                    "Peter",
+                    "Peter P",
                     "James P"
                 ]
             }

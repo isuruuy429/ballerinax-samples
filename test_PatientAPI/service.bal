@@ -46,7 +46,7 @@ isolated final map<PatientSourceConnect> profileImpl = {
         new r4:FHIRResponseErrorInterceptor()
     ]
 }
-service / on new http:Listener(9090) {
+service / on new http:Listener(9094) {
 
     // Search the resource type based on some filter criteria.
     isolated resource function get fhir/r4/Patient(http:RequestContext ctx, http:Request request) returns @http:Payload {mediaType: [r4:FHIR_MIME_TYPE_JSON, r4:FHIR_MIME_TYPE_XML]} json|xml|r4:FHIRError|error {

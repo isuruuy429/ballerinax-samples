@@ -48,7 +48,7 @@ isolated function getPatient(string id) returns aubase410:AUBasePatient|r4:FHIRE
                     valueCodeableConcept: {
                         coding: [
                             {
-                                "system": " https://healthterminologies.gov.au/fhir/ValueSet/gender-identity-response-1",
+                                "system": "https://healthterminologies.gov.au/fhir/ValueSet/gender-identity-response-1",
                                 "code": "446151000124109",
                                 "display": "male"
                             }

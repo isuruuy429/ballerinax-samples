@@ -3,7 +3,7 @@ import ballerinax/health.fhir.r4utils as utils;
 
 # A service representing a network-accessible API for the fhirpath evaluation.
 # bound to port `9090`.
-service /fhir on new http:Listener(9090) {
+service /fhir on new http:Listener(9095) {
 
     # API to evaluate Fhirpath expressions.
     #

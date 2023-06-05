@@ -2,7 +2,7 @@ import ballerina/http;
 import ballerinax/health.fhir.r4.uscore501;
 import ballerinax/health.fhir.r4;
 
-service /patients on new http:Listener(9090) {
+service /patients on new http:Listener(9097) {
     isolated resource function get [string id]() returns uscore501:USCorePatientProfile|r4:FHIRError? {
         return getPatient(id);
     }

@@ -38,7 +38,7 @@ final fhir:FHIRConnector fhirConnectorObj = check new (epicConfig);
 // @http:ServiceConfig{
 //     interceptors: [new fhir:URLRewriteInterceptor(base, customDomain)]
 // }
-service http:Service / on new http:Listener(9090) {
+service http:Service / on new http:Listener(9091) {
 
     // Get resource by ID
     isolated resource function get fhir/r4/[string resType]/[string id]() returns http:Response {
